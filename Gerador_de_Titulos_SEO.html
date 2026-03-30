@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Títulos SEO - Dominação de Marketplace</title>
+    <style>
+        /* CSS Reset Básico e Dark Mode */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Fundo escuro */
+            color: #e0e0e0; /* Texto claro */
+        }
+
+        /* Variáveis CSS para Cores Personalizáveis */
+        :root {
+            --primary-color: #007bff; /* Azul de destaque */
+            --secondary-color: #2c2c2c; /* Fundo de componentes */
+            --border-color: #444;
+            --text-color: #f0f0f0;
+            --success-color: #28a745;
+        }
+
+        /* Layout Principal */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        /* Cabeçalho */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            margin-top: 5px;
+        }
+
+        /* Formulário de Input */
+        .form-panel {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            box-sizing: border-box;
+        }
+
+        /* Checkboxes Adicionais */
+        .adjectives-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .adjectives-selector label {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--secondary-color);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .adjectives-selector input[type="checkbox"] {
+            display: none;
+        }
+
+        .adjectives-selector input[type="checkbox"]:checked + span {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+
+        .adjectives-selector span {
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* Botão Gerar */
+        #generateButton {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            background-color: var(--primary-color);
+            color: #fff;
+            margin-top: 20px;
+            transition: background-color 0.2s ease;
+        }
+
+        #generateButton:hover {
+            background-color: #0056b3;
+        }
+
+        /* Área de Resultados */
+        .results-panel {
+            margin-top: 30px;
+        }
+
+        .title-variation {
+            background-color: var(--secondary-color);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-variation p {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            flex-grow: 1;
+            padding-right: 10px;
+            word-break: break-all;
+        }
+
+        .title-variation small {
+            display: block;
+            color: #a0a0a0;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        .copy-button {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+
+        .copy-button.copied {
+            background-color: var(--success-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+            .title-variation {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .copy-button {
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Gerador de Títulos SEO - Dominação de Marketplace</h1>
+            <p>Crie 5 variações de títulos otimizados para Shopee e Shein, focando em diferentes gatilhos de venda.</p>
+        </div>
+
+        <div class="form-panel">
+            <div class="form-group">
+                <label for="productName">Nome Base do Produto:</label>
+                <input type="text" id="productName" placeholder="Ex: Fone de Ouvido Bluetooth TWS">
+            </div>
+
+            <div class="adjectives-selector">
+                <label>
+                    <input type="checkbox" name="adjective" value="premium">
+                    <span>Premium</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="adjective" value="prontaEntrega">
+                    <span>Pronta Entrega</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="adjective" value="garantia">
+                    <span>Garantia</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="adjective" value="freteGratis">
+                    <span>Frete Grátis</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="adjective" value="oferta">
+                    <span>Oferta</span>
+                </label>
+            </div>
+
+            <button id="generateButton">Gerar Estratégia de Dominação</button>
+        </div>
+
+        <div class="results-panel" id="resultsPanel">
+            <!-- Os resultados serão inseridos aqui pelo JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // --- Estrutura de Dados (Data Layer) ---
+        // Palavras-chave para as diferentes estratégias de SEO
+        const keywords = {
+            // Gatilhos de Envio/Estoque (Foco em Rapidez)
+            shippingTriggers: [
+                "Pronta Entrega", "Envio Imediato", "Estoque Nacional", "Fullfilment", "Entrega Rápida"
+            ],
+            // Adjetivos de Qualidade (Foco em Rapidez)
+            qualityAdjectives: [
+                "Original", "Certificado", "Durável", "Alta Qualidade", "Top"
+            ],
+            // Adjetivos Premium (Foco em Autoridade)
+            premiumAdjectives: [
+                "Premium", "Top de Linha", "Exclusivo", "Profissional", "Melhor Custo Benefício"
+            ],
+            // Especificações Técnicas (Foco em Autoridade) - Adicione mais conforme o nicho
+            technicalSpecs: [
+                "Bluetooth 5.0", "Wireless", "Recarregável", "USB-C", "Com Microfone", "À Prova D'Água"
+            ],
+            // Gatilhos de Preço/Promoção (Foco em Oferta)
+            priceTriggers: [
+                "Oferta", "Promoção", "Desconto", "Queima de Estoque", "Liquidação"
+            ],
+            // Benefícios de Uso (Foco em Oferta)
+            usageBenefits: [
+                "Para Casa", "Para Escritório", "Uso Diário", "Fácil Instalação", "Para Presente"
+            ],
+            // Sinônimos/Palavras Relacionadas (Foco em SEO) - Adicione mais conforme o nicho
+            seoSynonyms: [
+                "Headset", "Fone Sem Fio", "Earbuds", "Acessório", "Eletrônico", "Áudio"
+            ]
+        };
+
+        // --- Variáveis DOM ---
+        const productNameInput = document.getElementById('productName');
+        const generateButton = document.getElementById('generateButton');
+        const resultsPanel = document.getElementById('resultsPanel');
+        const adjectiveCheckboxes = document.querySelectorAll('.adjectives-selector input[type="checkbox"]');
+
+        // --- Funções Auxiliares ---
+
+        /**
+         * Converte uma string para Title Case (primeira letra de cada palavra maiúscula).
+         * @param {string} str - A string de entrada.
+         * @returns {string} - A string formatada.
+         */
+        function toTitleCase(str) {
+            return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+
+        /**
+         * Trunca a string para um máximo de caracteres e adiciona reticências se necessário.
+         * @param {string} str - A string de entrada.
+         * @param {number} maxLength - O comprimento máximo permitido.
+         * @returns {string} - A string truncada.
+         */
+        function truncateString(str, maxLength) {
+            if (str.length > maxLength) {
+                return str.substring(0, maxLength - 3).trim() + "...";
+            }
+            return str;
+        }
+
+        /**
+         * Seleciona um elemento aleatório de um array.
+         * @param {Array} arr - O array de onde selecionar.
+         * @returns {*} - O elemento selecionado.
+         */
+        function getRandomElement(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        /**
+         * Obtém os adjetivos selecionados pelo usuário.
+         * @returns {Array} - Array de strings com os adjetivos selecionados.
+         */
+        function getSelectedAdjectives() {
+            const selected = [];
+            adjectiveCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selected.push(checkbox.value);
+                }
+            });
+            return selected;
+        }
+
+        // --- Lógica de Geração de Títulos ---
+
+        /**
+         * Gera as 5 variações de títulos com base nas regras de SEO.
+         */
+        function generateTitles() {
+            const productName = productNameInput.value.trim();
+            if (!productName) {
+                alert("Por favor, insira o nome base do produto.");
+                return;
+            }
+
+            const selectedAdjectives = getSelectedAdjectives();
+            const results = [];
+
+            // Variação 1: Foco em Rapidez (Nome Base + Gatilhos de Envio/Estoque + Adjetivo de Qualidade)
+            let title1 = `${productName} ${getRandomElement(keywords.shippingTriggers)} ${getRandomElement(keywords.qualityAdjectives)}`;
+            results.push({
+                title: title1,
+                strategy: "Foco em Rapidez (Gatilhos de Envio)"
+            });
+
+            // Variação 2: Foco em Autoridade (Adjetivo Premium + Nome Base + Especificação Técnica + Garantia)
+            let title2 = `${getRandomElement(keywords.premiumAdjectives)} ${productName} ${getRandomElement(keywords.technicalSpecs)} ${selectedAdjectives.includes('garantia') ? 'Garantia' : ''}`;
+            results.push({
+                title: title2,
+                strategy: "Foco em Autoridade (Qualidade e Especificação)"
+            });
+
+            // Variação 3: Foco em Oferta (Gatilho de Preço/Promo + Nome Base + Benefício de Uso)
+            let title3 = `${getRandomElement(keywords.priceTriggers)} ${productName} ${getRandomElement(keywords.usageBenefits)}`;
+            results.push({
+                title: title3,
+                strategy: "Foco em Oferta (Preço e Benefício)"
+            });
+
+            // Variação 4: Foco em Palavras-Chave SEO (Nome Base + Sinônimos/Palavras Relacionadas)
+            let title4 = `${productName} ${getRandomElement(keywords.seoSynonyms)} ${getRandomElement(keywords.technicalSpecs)}`;
+            results.push({
+                title: title4,
+                strategy: "Foco em SEO (Palavras-Chave e Sinônimos)"
+            });
+
+            // Variação 5: Mix Completo (Combinação aleatória de todas as categorias)
+            let mixParts = [
+                getRandomElement(keywords.premiumAdjectives),
+                productName,
+                getRandomElement(keywords.shippingTriggers),
+                getRandomElement(keywords.priceTriggers)
+            ];
+            // Remove duplicatas e embaralha para um mix mais orgânico
+            mixParts = [...new Set(mixParts)];
+            mixParts.sort(() => Math.random() - 0.5);
+            let title5 = mixParts.join(" ");
+            results.push({
+                title: title5,
+                strategy: "Mix Completo (Combinação Aleatória)"
+            });
+
+            // Renderiza os resultados na interface
+            renderResults(results);
+        }
+
+        /**
+         * Renderiza os títulos gerados na interface.
+         * Aplica Title Case e verifica o limite de 100 caracteres.
+         * @param {Array<Object>} generatedTitles - Array de objetos com {title, strategy}.
+         */
+        function renderResults(generatedTitles) {
+            resultsPanel.innerHTML = ''; // Limpa resultados anteriores
+
+            generatedTitles.forEach((item, index) => {
+                const finalTitle = toTitleCase(item.title);
+                const truncatedTitle = truncateString(finalTitle, 100);
+                const variationElement = document.createElement('div');
+                variationElement.classList.add('title-variation');
+                variationElement.id = `result-${index}`;
+
+                variationElement.innerHTML = `
+                    <div>
+                        <p>${truncatedTitle}</p>
+                        <small>Estratégia: ${item.strategy} | Tamanho: ${truncatedTitle.length} caracteres</small>
+                    </div>
+                    <button class="copy-button" onclick="copyToClipboard('result-${index}')">Copiar</button>
+                `;
+                resultsPanel.appendChild(variationElement);
+            });
+        }
+
+        /**
+         * Copia o texto de um elemento para a área de transferência.
+         * @param {string} elementId - ID do elemento que contém o texto a ser copiado.
+         */
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const textToCopy = element.querySelector('p').textContent;
+
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    const button = element.querySelector('.copy-button');
+                    button.textContent = 'Copiado!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.textContent = 'Copiar';
+                        button.classList.remove('copied');
+                    }, 1500);
+                })
+                .catch(err => {
+                    console.error('Erro ao copiar texto:', err);
+                    alert("Erro ao copiar texto. Tente novamente ou copie manualmente.");
+                });
+        }
+
+        // --- Event Listeners ---
+        generateButton.addEventListener('click', generateTitles);
+    </script>
+
+</body>
+</html>
